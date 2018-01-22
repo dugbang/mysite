@@ -1,0 +1,18 @@
+<h2>{{ object.title }}</h2>
+
+<p class="other_posts">
+    {% if object.get_previous_by_modify_date %} # 1
+    <a href="{{ object.get_previous_post.get_absolute_url }}" title="View previous post"> &laquo;--{{ object.get_previous_post }}</a> # 2
+    {% endif %}
+
+    {% if object.get_next_by_modify_date %} # 3
+    | <a href="{{ object.get_next_post.get_absolute_url }}" title="View next post">{{ object.get_next_post }}--&raquo;</a> # 4
+    {% endif %}
+</p>
+
+<p class="date">{{ object.modify_date|date:"j F Y" }}</p> # 5
+<br/>
+
+<div class="body">
+    {{ object.content|linebreaks }} # 6
+</div>
