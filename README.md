@@ -2,6 +2,11 @@
 
 * 장고를 학습하면서 발생하는 모든 연습코드를 본 프로젝트에 기록한다.
 
+1. [Python + Django 서버 구축하기](https://www.gitbook.com/book/javafa/python-django/details)
+    - app; memo
+    - app; bbs
+        - Rest Framework 사용
+        - 포스트맨을 통한 데이터 입출력 확인
 1. [예제로 배우는 Python 프로그래밍 - 장고 기초](http://pythonstudy.xyz/python/article/301-Django-%EC%86%8C%EA%B0%9C)
     - app; home
     - app; feedback

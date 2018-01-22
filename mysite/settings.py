@@ -38,6 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'rest_framework',
+    'bbs',
+
     # 'debug_toolbar',
 
     'polls.apps.PollsConfig',
@@ -46,6 +49,8 @@ INSTALLED_APPS = [
 
     'home.apps.HomeConfig',
     'feedback.apps.FeedbackConfig',
+
+    'memo.apps.MemoConfig',
 ]
 
 MIDDLEWARE = [

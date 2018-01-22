@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Memo </title>
+</head>
+<body>
+    <div id="content">
+        <h1>Memo List</h1>
+        <ul>
+            {% for memo in object_list %}
+                <li><a href="{% url 'memo:detail' memo.id %}"> {{ memo }} </a></li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
