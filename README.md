@@ -14,6 +14,7 @@
 1. [장고를 활용한 쉽고 빠른 웹 개발](http://www.hanbit.co.kr/store/books/look.php?p_code=B7703021280)
     - app; bookmark
     - app; blog
+    - app; /
     - [웹사이트](https://kimdoky.github.io/tags/django.html)
         - 도서의 내용이 그대로 정리되어 있음.
 1. [장고 튜토리얼](https://docs.djangoproject.com/ko/2.0/intro/tutorial01/)
