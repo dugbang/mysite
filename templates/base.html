@@ -3,7 +3,7 @@
 <head>
     <title>{% block title %} Django Web Programming {% endblock %}</title>
     {% load staticfiles %}
-    <link rel="stylesheet" href="{% static "css/base.css" %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" type="text/css">
     <link rel="stylesheet" href="{% block extrastyle %}{% endblock %}">
 </head>
 
@@ -17,7 +17,7 @@
 </div>
 
 <div id="menu">
-    <li><a href="#">Home</a></li>
+    <li><a href="{% url 'home' %}">Home</a></li>
     <li><a href="{% url 'bookmark:index' %}">Bookmark</a></li>
     <li><a href="{% url 'blog:index' %}">Blog</a></li>
     <li><a href="#">Photo</a></li>

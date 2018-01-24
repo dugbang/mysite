@@ -13,9 +13,8 @@
     </ul>
     <br/>
 
-
     <div>
-        <ul> # 4
+        <ul>
             {% for post in object_list %}
             <li>{{  post.modify_date|date:"Y-m-d" }}
                 <a href="{{ post.get_absolute_url }}"><strong>{{ post.title }}</strong></a></li>

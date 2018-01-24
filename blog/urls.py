@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, re_path
 from django.conf.urls import url
 
 from . import views
@@ -11,11 +11,15 @@ urlpatterns = [
     # ex: /post/ (same as /)
     path('post/', views.PostLV.as_view(), name='post_list'),  # 2
 
-    # ex: /post/ex/
-    path('post/ex/<slug:slug>/', views.PostDV.as_view(), name='post_detail'),  # 3
-
     # ex: /archive/
     path('archive/', views.PostAV.as_view(), name='post_archive'),  # 4
+
+    # ex: /today/
+    path('today/', views.PostTAV.as_view(), name='post_today_archive'),
+
+    # ex: /post/ex/
+    path('post/<slug:slug>/', views.PostDV.as_view(), name='post_detail'),  # 3
+    # re_path('post/(?P<slug>[\w-_]+)/', views.PostDV.as_view(), name='post_detail'),  # 3
 
     # ex: /2017/
     path('<int:year>/', views.PostYAV.as_view(), name='post_year_archive'),  # 5
@@ -25,7 +29,4 @@ urlpatterns = [
 
     # ex: /2017/nov/10/
     path('<int:year>/<int:month>/<int:day>/', views.PostDAV.as_view(), name='post_day_archive'),  # 7
-
-    # ex: /today/
-    path('today/', views.PostTAV.as_view(), name='post_today_archive'),
 ]

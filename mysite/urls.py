@@ -26,6 +26,6 @@ urlpatterns = [
     path('polls/', include('polls.urls')),
     path('feedback/', include('feedback.urls')),
     path('home/', include('home.urls')),
-    path('', views.index),
+    path('', views.HomeView.as_view(), name='home'),
     path('admin/', admin.site.urls),
 ]

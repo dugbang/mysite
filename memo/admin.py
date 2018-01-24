@@ -5,7 +5,7 @@ from .models import Memo
 
 
 class MemoAdmin(admin.ModelAdmin):
-    list_display = ('content', 'modify_date')
+    list_display = ('u_id', 'content', 'modify_date')
 
 
 admin.site.register(Memo, MemoAdmin)

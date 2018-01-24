@@ -25,6 +25,7 @@ class Post(models.Model):
 
     def get_absolute_rul(self):
         return reverse('blog:post_detail', args=(self.slug, ))
+        # return reverse('blog:post_detail', kwargs={'slug': self.slug})
 
     def get_previous_post(self):
         return self.get_previous_by_modify_date()

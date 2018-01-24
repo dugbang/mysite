@@ -20,3 +20,15 @@
 1. [장고 튜토리얼](https://docs.djangoproject.com/ko/2.0/intro/tutorial01/)
     - app; polls
         - 테스트 방법에 대한 설명이 있음.
+
+## 확인해야 할 정보
+
+* [장고 테이블 지우고 난 후 다시 마이그레이션 하는 방법!](http://forybm.tistory.com/2)
+    1. 해당 앱에 있는 migrations 폴더 삭제, 단 __init__.py 파일을 제외하고 삭제하기!
+    2. database에 직접 접속하여 테이블 중 django_migrations 라는 테이블에서 해당 앱에 대한 raw를 삭제.
+        - DELETE FROM django_migrations WHERE app = '앱 이름'
+        - 앱에 해당되는 테이블 삭제
+    3. 디비 재설정
+        - python3 manage.py makemigrations
+        - python3 manage.py migrate
+            - python3 manage.py migrate --fake <앱이름>
