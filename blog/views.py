@@ -25,24 +25,33 @@ class PostDV(DetailView):
 class PostAV(ArchiveIndexView):
     model = Post
     date_field = 'modify_date'
+    allow_future = True
 
 
 class PostYAV(YearArchiveView):
+    # queryset = Post.objects.all()
     model = Post
-    date_field = 'modify_date'
+    date_field = "modify_date"
     make_object_list = True
+    allow_future = True
+    # model = Post
+    # date_field = 'modify_date'
+    # make_object_list = True
 
 
 class PostMAV(MonthArchiveView):
     model = Post
     date_field = 'modify_date'
+    allow_future = True
 
 
 class PostDAV(DayArchiveView):
     model = Post
     date_field = 'modify_date'
+    allow_future = True
 
 
 class PostTAV(TodayArchiveView):
     model = Post
     date_field = 'modify_date'
+    allow_future = True

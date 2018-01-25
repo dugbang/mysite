@@ -27,7 +27,7 @@
     1. 해당 앱에 있는 migrations 폴더 삭제, 단 __init__.py 파일을 제외하고 삭제하기!
     2. database에 직접 접속하여 테이블 중 django_migrations 라는 테이블에서 해당 앱에 대한 raw를 삭제.
         - DELETE FROM django_migrations WHERE app = '앱 이름'
-        - 앱에 해당되는 테이블 삭제
+        - **앱에 해당되는 테이블 삭제**
     3. 디비 재설정
         - python3 manage.py makemigrations
         - python3 manage.py migrate
