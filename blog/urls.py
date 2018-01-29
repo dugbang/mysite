@@ -29,4 +29,10 @@ urlpatterns = [
 
     # ex: /2017/
     path('<int:year>/', views.PostYAV.as_view(), name='post_year_archive'),  # 5
+
+    # ex: /tag/
+    path('tag/', views.TagTV.as_view(), name='tag_cloud'),
+
+    # ex: /tag/tagname/
+    path('tag/<tag>/', views.PostTOL.as_view(), name='tagged_object_list'),
 ]

@@ -45,7 +45,9 @@ INSTALLED_APPS = [
 
     'polls.apps.PollsConfig',
     'bookmark.apps.BookmarkConfig',
+
     'blog.apps.BlogConfig',
+    'tagging.apps.TaggingConfig',
 
     'home.apps.HomeConfig',
     'feedback.apps.FeedbackConfig',
