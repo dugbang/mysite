@@ -49,11 +49,17 @@ INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     'tagging.apps.TaggingConfig',
 
+    'disqus',
+    'django.contrib.sites',
+
     'home.apps.HomeConfig',
     'feedback.apps.FeedbackConfig',
 
     'memo.apps.MemoConfig',
 ]
+
+DISQUS_WEBSITE_SHORTNAME = 'django-8'
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
