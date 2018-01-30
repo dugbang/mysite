@@ -35,4 +35,8 @@ urlpatterns = [
 
     # ex: /tag/tagname/
     path('tag/<tag>/', views.PostTOL.as_view(), name='tagged_object_list'),
+
+    # ex: /search/
+    path('search/', views.SearchFormView.as_view(), name='search'),
+
 ]
