@@ -56,6 +56,8 @@ INSTALLED_APPS = [
     'feedback.apps.FeedbackConfig',
 
     'memo.apps.MemoConfig',
+    'photo.apps.PhotoConfig',
+
 ]
 
 DISQUS_WEBSITE_SHORTNAME = 'django-8'
