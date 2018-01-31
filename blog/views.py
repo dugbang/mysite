@@ -1,12 +1,13 @@
 from django.shortcuts import render
 
 # Create your views here.
+from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, TemplateView
 from django.views.generic.dates import ArchiveIndexView, YearArchiveView, MonthArchiveView
 from django.views.generic.dates import DayArchiveView, TodayArchiveView
 from tagging.views import TaggedObjectList
 
-from django.views.generic.edit import FormView
+from django.views.generic.edit import FormView, CreateView, UpdateView, DeleteView
 from blog.forms import PostSearchForm
 from django.db.models import Q
 
@@ -14,6 +15,9 @@ from blog.models import Post
 
 
 # -- TemplateView
+from mysite.views import LoginRequiredMixin
+
+
 class TagTV(TemplateView):
     template_name = 'tagging/tagging_cloud.html'
 
@@ -87,3 +91,34 @@ class SearchFormView(FormView):
         context = {'form': form, 'search_term': schWord, 'object_list': post_list}
 
         return render(self.request, self.template_name, context)
+
+
+class PostCreateView(LoginRequiredMixin, CreateView):
+    model = Post
+    fields = ['title', 'slug', 'description', 'content', 'tag']
+    initial = {'slug': 'auto-filling-do-not-input'} # 1
+    #fields = ['title', 'description', 'content', 'tag'] # 2
+    success_url = reverse_lazy('blog:index')
+
+    def form_valid(self, form):
+        form.instance.owner = self.request.user
+        return super(PostCreateView, self).form_valid(form)
+
+
+class PostChangeLV(LoginRequiredMixin, ListView):
+    template_name = 'blog/post_change_list.html'
+
+    def get_queryset(self):
+        return Post.objects.filter(owner=self.request.user)
+
+
+class PostUpdateView(LoginRequiredMixin, UpdateView):
+    model = Post
+    fields = ['title', 'slug', 'description', 'content', 'tag']
+    success_url = reverse_lazy('blog:index')
+
+
+class PostDeleteView(LoginRequiredMixin, DeleteView):
+    model = Post
+    success_url = reverse_lazy('blog:index')
+

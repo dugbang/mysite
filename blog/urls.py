@@ -39,4 +39,15 @@ urlpatterns = [
     # ex: /search/
     path('search/', views.SearchFormView.as_view(), name='search'),
 
+    # ex: /add/
+    path('add/', views.PostCreateView.as_view(), name="add"),
+
+    # ex: /change/
+    path('change/', views.PostChangeLV.as_view(), name="change"),
+
+    # ex: /99/update/
+    path('<int:pk>/update/', views.PostUpdateView.as_view(), name="update"),
+
+    # ex: /99/delete/
+    path('<int:pk>/delete/', views.PostDeleteView.as_view(), name="delete"),
 ]

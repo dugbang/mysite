@@ -7,8 +7,17 @@ app_name = 'bookmark'
 urlpatterns = [
     path('', views.BookmarkLV.as_view(), name='index'),
     path('<int:pk>/', views.BookmarkDV.as_view(), name='detail'),
-    # path(r'^?P<pk>\d+/$', views.BookmarkDV.as_view(), name='detail'),
-    # <int:question_id>/
-    # path(r'^bookmark/$', views.BookmarkLV.as_view(), name='index'),
-    # path(r'^bookmark/?P<pk>\d+/$', views.BookmarkDV.as_view(), name='detail'),
+
+
+    path('add/', views.BookmarkCreateView.as_view(), name="add"),
+
+    # ex: /change/
+    path('change/', views.BookmarkChangeLV.as_view(), name="change"),
+
+    # ex: /99/update/
+    path('<int:pk>/update/', views.BookmarkUpdateView.as_view(), name="update"),
+
+    # ex: /99/delete/
+    path('<int:pk>/delete/', views.BookmarkDeleteView.as_view(), name="delete"),
+
 ]
