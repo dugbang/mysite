@@ -32,3 +32,10 @@
         - python3 manage.py makemigrations
         - python3 manage.py migrate
             - python3 manage.py migrate --fake <앱이름>
+
+## 패키지 정보 확인
+
+* 설치 패키지 정보 저장하기
+    - pip freeze >> requirements.txt
+* 패키지 자동 설치하기
+    - pip install -r requirements.txt
