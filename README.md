@@ -2,6 +2,11 @@
 
 * 장고를 학습하면서 발생하는 모든 연습코드를 본 프로젝트에 기록한다.
 
+1. [날로 먹는 Django 웹프레임워크](https://blog.hannal.com/category/start-with-django-webframework/)
+    - 사진등록 웹사이트 제작
+    - 기획에서 부터 제작까지 전체적인 부분 설명
+    - [개발 환경 꾸리기](https://blog.hannal.com/2014/8/start_with_django_webframework_02/)
+      - python3 설치, 가상환경 구축 및 프로젝트 설정까지 설명
 1. [Python + Django 서버 구축하기](https://www.gitbook.com/book/javafa/python-django/details)
     - app; memo
     - app; bbs
@@ -36,6 +41,6 @@
 ## 패키지 정보 확인
 
 * 설치 패키지 정보 저장하기
-    - pip freeze >> requirements.txt
+    - pip freeze > requirements.txt
 * 패키지 자동 설치하기
     - pip install -r requirements.txt
