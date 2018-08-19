@@ -8,7 +8,7 @@
 {% block content %}
 <div id="content">
     <h1>Photo Create/Update - {{ user }}</h1>
-    {% if form.is_multipart %} # 1
+    {% if form.is_multipart %}
     <form action="." enctype="multipart/form-data" method="post">
     {% else %}
     <form action="." method="post">
@@ -27,8 +27,8 @@
         </div>
 
         <div class="form-row">
-            {{ form.album.label_tag }} {{ form.album }} # 2
-            <button type="button"><a href="{% url 'photo:album_add' %}">Add Album</a></button> # 3
+            {{ form.album.label_tag }} {{ form.album }}
+            <button type="button"><a href="{% url 'photo:album_add' %}">Add Album</a></button>
         </div>
 
         <div class="form-row">{{ form.title.label_tag }} {{ form.title }}</div>

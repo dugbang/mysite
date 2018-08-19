@@ -21,6 +21,8 @@ from django.conf.urls.static import static
 from . import views
 
 urlpatterns = [
+    path('gm_photos/', include('gm_photos.urls')),
+
     path('photo/', include('photo.urls')),
     path('blog/', include('blog.urls')),
     path('bbs/', include('bbs.urls')),
