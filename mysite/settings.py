@@ -38,9 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'ezp10',
     'gm_photos',
 
     'rest_framework',
+    'rest_framework_swagger',
+
+    'rest_app',
     'bbs',
 
     # 'debug_toolbar',
@@ -62,6 +66,18 @@ INSTALLED_APPS = [
 
 ]
 
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        # 'rest_framework.permissions.IsAdminUser',
+    ],
+    'TEST_REQUEST_DEFAULT_FORMAT': 'json',
+    # 'PAGE_SIZE': 10    # 임의추가
+}
+
+
 DISQUS_WEBSITE_SHORTNAME = 'django-8'
 SITE_ID = 1
 
@@ -73,6 +89,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'request_logging.middleware.LoggingMiddleware',
 ]
 
 ROOT_URLCONF = 'mysite.urls'
@@ -101,8 +119,15 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'dugbang_db',
+        'USER': 'dugbang',
+        'PASSWORD': 'dugbang1',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 
@@ -162,3 +187,60 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
+
+
+# 로깅정보 설정
+# http://192.168.97.100/redmine/boards/2/topics/20
+
+LOG_FILE = os.path.join(BASE_DIR, 'myLog.log')
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+
+    'formatters': {
+        'verbose': {
+            'format': "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
+            'datefmt': "%Y-%m-%d %H:%M:%S"
+            # 'datefmt': "%d/%b/%Y %H:%M:%S"
+        },
+        'simple': {
+            'format': '%(levelname)s [%(name)s:%(lineno)s] %(message)s'
+        },
+    },
+
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': LOG_FILE,
+            'encoding': 'utf-8',
+            'formatter': 'verbose',
+            'maxBytes': 1024*1024*1,
+            'backupCount': 10,
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple',
+        },
+    },
+
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'propagate': True,
+            'level': 'INFO',
+        },
+
+        'django.request': {
+            'handlers': ['file'],
+            'propagate': False,
+            'level': 'INFO',
+        },
+
+        'ezp10': {
+            'handlers': ['file', 'console'],
+            'level': 'DEBUG',
+        },
+    }
+}

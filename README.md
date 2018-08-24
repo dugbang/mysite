@@ -2,16 +2,14 @@
 
 * 장고를 학습하면서 발생하는 모든 연습코드를 본 프로젝트에 기록한다.
 
-1. [날로 먹는 Django 웹프레임워크](https://blog.hannal.com/category/start-with-django-webframework/)
-    - 사진등록 웹사이트 제작
-    - 기획에서 부터 제작까지 전체적인 부분 설명
-    - [개발 환경 꾸리기](https://blog.hannal.com/2014/8/start_with_django_webframework_02/)
-      - python3 설치, 가상환경 구축 및 프로젝트 설정까지 설명
 1. [Python + Django 서버 구축하기](https://www.gitbook.com/book/javafa/python-django/details)
     - app; memo
     - app; bbs
         - Rest Framework 사용
         - 포스트맨을 통한 데이터 입출력 확인
+    - [Rest Framework](https://javafa.gitbooks.io/python-django/content/chapter4.html)
+    - [Rest Framework 인증](https://javafa.gitbooks.io/python-django/content/chapter5.html)
+
 1. [예제로 배우는 Python 프로그래밍 - 장고 기초](http://pythonstudy.xyz/python/article/301-Django-%EC%86%8C%EA%B0%9C)
     - app; home
     - app; feedback
@@ -25,6 +23,11 @@
 1. [장고 튜토리얼](https://docs.djangoproject.com/ko/2.0/intro/tutorial01/)
     - app; polls
         - 테스트 방법에 대한 설명이 있음.
+1. [날로 먹는 Django 웹프레임워크](https://blog.hannal.com/category/start-with-django-webframework/)
+    - 사진등록 웹사이트 제작
+    - 기획에서 부터 제작까지 전체적인 부분 설명
+    - [개발 환경 꾸리기](https://blog.hannal.com/2014/8/start_with_django_webframework_02/)
+      - python3 설치, 가상환경 구축 및 프로젝트 설정까지 설명
 
 ## 확인해야 할 정보
 

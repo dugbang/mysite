@@ -3,6 +3,7 @@ from .models import Photo
 
 
 class PhotoForm(ModelForm):
+    model = Photo
+
     class Meta:
-        model = Photo
         exclude = ('filtered_image',)

@@ -20,7 +20,11 @@ from django.conf.urls.static import static
 
 from . import views
 
+
 urlpatterns = [
+    path('rest_app/', include('rest_app.urls')),
+
+    path('ezp10/', include('ezp10.urls')),
     path('gm_photos/', include('gm_photos.urls')),
 
     path('photo/', include('photo.urls')),
