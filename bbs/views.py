@@ -13,25 +13,9 @@ class BbsList(generics.ListCreateAPIView):
     queryset = Bbs.objects.all()
     serializer_class = BbsSerializer
 
-    # def get(self, request): # as_view() -> dispatch() 함수에서 get() 함수 호출
-    #     # <view logic>
-    #     return HttpResponse('result')
-
-    # def post(self, request, *args, **kwargs):
-    #     pass
-
 
 # generics 에 상세, 수정, 삭제 API가 정의되어 있다
 class BbsDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Bbs.objects.all()
     serializer_class = BbsSerializer
-
-    # def delete(self, request, *args, **kwargs):
-    #     pass
-    #
-    # def update(self, request, *args, **kwargs):
-    #     pass
-    #
-    # def get(self, request, *args, **kwargs):
-    #     pass
 

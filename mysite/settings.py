@@ -25,7 +25,7 @@ SECRET_KEY = 'i-m6fw5i!s4nn==nrxwv@l&3w1y6bp!#9epxzu8=)@kl40*@%!'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', '192.168.0.2', ]
 
 
 # Application definition
@@ -188,9 +188,6 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
 
-
-# 로깅정보 설정
-# http://192.168.97.100/redmine/boards/2/topics/20
 
 LOG_FILE = os.path.join(BASE_DIR, 'myLog.log')
 LOGGING = {
