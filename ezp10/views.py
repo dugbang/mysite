@@ -6,12 +6,13 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.views.generic import ListView
-from rest_framework import status
+from rest_framework import status, generics
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from ezp10.models import Plant
-from ezp10.serializers import PlantSerializerFunc
+from ezp10.models import Plant, Capture
+from ezp10.serializers import PlantSerializer, CaptureSerializer
+
 
 ezp10_logger = logging.getLogger(__name__)
 
@@ -19,6 +20,30 @@ ezp10_logger = logging.getLogger(__name__)
 class PlantLV(ListView):
     model = Plant
     template_name = 'ezp10/plant_list.html'
+
+
+# generics 에 목록과 생성 API 가 정의되어 있다
+class PlantList(generics.ListCreateAPIView):
+    queryset = Plant.objects.all()
+    serializer_class = PlantSerializer
+
+
+# generics 에 상세, 수정, 삭제 API가 정의되어 있다
+class PlantDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Plant.objects.all()
+    serializer_class = PlantSerializer
+
+
+# generics 에 목록과 생성 API 가 정의되어 있다
+class CaptureList(generics.ListCreateAPIView):
+    queryset = Capture.objects.all()
+    serializer_class = CaptureSerializer
+
+
+# generics 에 상세, 수정, 삭제 API가 정의되어 있다
+class CaptureDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Capture.objects.all()
+    serializer_class = CaptureSerializer
 
 
 @api_view(['GET', 'DELETE', 'PUT'])
@@ -30,7 +55,7 @@ def get_delete_update_plants(request, pk):
 
     # get details of a single plant
     if request.method == 'GET':
-        serializer = PlantSerializerFunc(plant)
+        serializer = PlantSerializer(plant)
         return Response(serializer.data)
     # delete a single plant
     elif request.method == 'DELETE':
@@ -45,7 +70,7 @@ def get_post_plants(request):
     # get all puppies
     if request.method == 'GET':
         plants = Plant.objects.all()
-        serializer = PlantSerializerFunc(plants, many=True)
+        serializer = PlantSerializer(plants, many=True)
         return Response(serializer.data)
     # insert a new record for a puppy
     elif request.method == 'POST':
@@ -55,7 +80,7 @@ def get_post_plants(request):
         # data = json.loads(request.body.decode("utf-8"))
         data = json.loads(request.body)
         ezp10_logger.debug(data)
-        serializer = PlantSerializerFunc(data=data)
+        serializer = PlantSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
