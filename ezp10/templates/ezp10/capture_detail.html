@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="content">
+
+    <table class="capture-detail">
+        <tr>
+            <td>
+                <a href="{{ object.image.url }}">
+                    <img src="{{ object.image.url }}" style="max-width: 100%">
+                </a>
+            </td>
+
+            <td>
+                <ul>
+                    <li>file name</li>
+                    <p>{{ object.name }}</p>
+                    <li>Date Create</li>
+                    <p>{{ object.create_date }}</p>
+                </ul>
+            </td>
+        </tr>
+    </table>
+
+</div>
+
+</body>
+</html>

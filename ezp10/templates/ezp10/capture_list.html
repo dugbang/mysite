@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="content">
+
+    {% for item in object_list %}
+    <div class="clear_float">
+        <b><i>{{ item.plant.name }}</i></b>
+        <h2 style="display:inline"><a href="{{ item.image.url }}">{{ item.image.name }}</a></h2>
+        <b><i>{{ item.create_at }}</i></b>
+    </div>
+    {% endfor %}
+</div>
+</body>
+</html>

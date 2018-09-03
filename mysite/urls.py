@@ -22,7 +22,7 @@ from . import views
 
 
 urlpatterns = [
-    path('rest_app/', include('rest_app.urls')),
+    # path('rest_app/', include('rest_app.urls')),
 
     # path('ezp_api/', include('ezp_api.urls')),
     path('ezp10/', include('ezp10.urls')),

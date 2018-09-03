@@ -6,10 +6,11 @@ from django.test import TestCase, RequestFactory, Client
 
 # Create your tests here.
 from django.urls import reverse
+# from django.utils.datetime_safe import datetime
 from rest_framework import status
 
 from ezp10.models import Plant, Capture
-from ezp10.serializers import PlantSerializerFunc, CaptureSerializer, PlantSerializer
+from ezp10.serializers import CaptureSerializer, PlantSerializer
 from ezp10.views import PlantLV
 
 ezp10_logger = logging.getLogger(__name__)
@@ -18,82 +19,84 @@ ezp10_logger = logging.getLogger(__name__)
 client = Client()
 
 
-class TestModelCapture(TestCase):
-
-    def setUp(self):
-        self.plants = [
-            Plant.objects.create(name='사과'),
-            Plant.objects.create(name='바나나'),
-            Plant.objects.create(name='고추'),
-        ]
-        self.plants_count = len(self.plants)
-
-        str_date = '{}'.format(datetime.now())[:19]
-        # str_date = datetime.now()
-        self.captures = [
-            Capture.objects.create(plant_id=self.plants[0], name='TDD test 0', create_date=str_date),
-            Capture.objects.create(plant_id=self.plants[0], name='TDD test 1', create_date=str_date),
-            Capture.objects.create(plant_id=self.plants[2], name='TDD test 2', create_date=str_date),
-            Capture.objects.create(plant_id=self.plants[1], name='TDD test 3', create_date=str_date),
-            Capture.objects.create(plant_id=self.plants[2], name='TDD test 4', create_date=str_date),
-        ]
-        self.captures_count = len(self.captures)
-
-    def test_captures_count(self):
-        self.assertEqual(Plant.objects.count(), self.plants_count)
-        self.assertEqual(Capture.objects.count(), self.captures_count)
-
-    def test_get_all_plants(self):
-        response = client.get(reverse('ezp10:capture_list'))
-        capture = Capture.objects.all()
-        serializer = CaptureSerializer(capture, many=True)
-        self.assertEqual(response.data, serializer.data)
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-
-    def test_get_invalid_single_plant(self):
-        response = client.get(reverse('ezp10:capture_detail', kwargs={'pk': 300}))
-        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
-
-    def test_get_valid_single_plant(self):
-        response = client.get(reverse('ezp10:capture_detail', kwargs={'pk': self.captures[3].pk}))
-        capture = Capture.objects.get(pk=self.captures[3].pk)
-        serializer = CaptureSerializer(capture)
-        self.assertEqual(response.data, serializer.data)
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-
-    def test_create_valid_plant(self):
-        str_date = '{}'.format(datetime.now())[:19]
-
-        plant = Plant.objects.filter(name='고추')
-        ezp10_logger.debug(plant[0].id)
-
-        payload = {
-            'plant_id': plant[0].id,
-            'name': 'post insert...',
-            'create_date': str_date
-        }
-        response = client.post(
-            reverse('ezp10:capture_list'),
-            data=json.dumps(payload),
-            content_type='application/json'
-        )
-        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertEqual(Capture.objects.count(), self.captures_count + 1)
-
-    def test_create_invalid_plant(self):
-        self.invalid_payload = {
-            'name': '',
-        }
-        response = client.post(
-            reverse('ezp10:capture_list'),
-            data=json.dumps(self.invalid_payload),
-            content_type='application/json'
-        )
-        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+# class TestModelCapture(TestCase):
+#
+#     def setUp(self):
+#         self.plants = [
+#             Plant.objects.create(name='사과'),
+#             Plant.objects.create(name='바나나'),
+#             Plant.objects.create(name='고추'),
+#         ]
+#         self.plants_count = len(self.plants)
+#
+#         str_date = '{}'.format(datetime.now())[:19]
+#         # str_date = datetime.now()
+#         self.captures = [
+#             Capture.objects.create(plant_id=self.plants[0], name='TDD test 0', create_date=str_date),
+#             Capture.objects.create(plant_id=self.plants[0], name='TDD test 1', create_date=str_date),
+#             Capture.objects.create(plant_id=self.plants[2], name='TDD test 2', create_date=str_date),
+#             Capture.objects.create(plant_id=self.plants[1], name='TDD test 3', create_date=str_date),
+#             Capture.objects.create(plant_id=self.plants[2], name='TDD test 4', create_date=str_date),
+#         ]
+#         self.captures_count = len(self.captures)
+#
+#     def test_captures_count(self):
+#         self.assertEqual(Plant.objects.count(), self.plants_count)
+#         self.assertEqual(Capture.objects.count(), self.captures_count)
+#
+#     def test_get_all_plants(self):
+#         response = client.get(reverse('ezp10:capture_list'))
+#         capture = Capture.objects.all()
+#         serializer = CaptureSerializer(capture, many=True)
+#         self.assertEqual(response.data, serializer.data)
+#         self.assertEqual(response.status_code, status.HTTP_200_OK)
+#
+#     def test_get_invalid_single_plant(self):
+#         response = client.get(reverse('ezp10:capture_detail', kwargs={'pk': 300}))
+#         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+#
+#     def test_get_valid_single_plant(self):
+#         response = client.get(reverse('ezp10:capture_detail', kwargs={'pk': self.captures[3].pk}))
+#         capture = Capture.objects.get(pk=self.captures[3].pk)
+#         serializer = CaptureSerializer(capture)
+#         self.assertEqual(response.data, serializer.data)
+#         self.assertEqual(response.status_code, status.HTTP_200_OK)
+#
+#     def test_create_valid_plant(self):
+#         str_date = '{}'.format(datetime.now())[:19]
+#
+#         plant = Plant.objects.filter(name='고추')
+#         ezp10_logger.debug(plant[0].id)
+#
+#         payload = {
+#             'plant_id': plant[0].id,
+#             'name': 'post insert...',
+#             'create_date': str_date
+#         }
+#         response = client.post(
+#             reverse('ezp10:capture_list'),
+#             data=json.dumps(payload),
+#             content_type='application/json'
+#         )
+#         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+#         self.assertEqual(Capture.objects.count(), self.captures_count + 1)
+#
+#     def test_create_invalid_plant(self):
+#         self.invalid_payload = {
+#             'name': '',
+#         }
+#         response = client.post(
+#             reverse('ezp10:capture_list'),
+#             data=json.dumps(self.invalid_payload),
+#             content_type='application/json'
+#         )
+#         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
 
 class TestModelPlant(TestCase):
-
+    """
+    TODO; 갱신/삭제 부분에 대한 테스트가 추가되어야 함.
+    """
     def setUp(self):
         self.plants = [
             Plant.objects.create(name='사과'),
@@ -109,23 +112,29 @@ class TestModelPlant(TestCase):
 
     def test_get_all_plants(self):
         # get API response
-        response = client.get(reverse('ezp10:plant_list'))
+        response = client.get(reverse('ezp10:api_plant_list'))
         # response = client.get(self.base_url)
         # get data from db
+        print('\nresponse.data; ', response.data)
+
         plants = Plant.objects.all()
         serializer = PlantSerializer(plants, many=True)
         self.assertEqual(response.data, serializer.data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_get_invalid_single_plant(self):
-        response = client.get(reverse('ezp10:plant_detail', kwargs={'pk': 300}))
+        response = client.get(reverse('ezp10:api_plant_detail', kwargs={'pk': 300}))
         # response = client.get('{}300'.format(self.base_url))
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
     def test_get_valid_single_plant(self):
-        response = client.get(reverse('ezp10:plant_detail', kwargs={'pk': self.plants[0].pk}))
+        response = client.get(reverse('ezp10:api_plant_detail', kwargs={'pk': self.plants[0].pk}))
         # response = client.get(reverse('get_delete_update_puppy', kwargs={'pk': self.rambo.pk}))
         # response = client.get('{}{}'.format(self.base_url, self.plants[0].pk))
+        print('\nresponse.data; ', response.data)
+        print(response.data['name'])
+        # print(response.data['create_at'])
+
         plant = Plant.objects.get(pk=self.plants[0].pk)
         serializer = PlantSerializer(plant)
         self.assertEqual(response.data, serializer.data)
@@ -136,8 +145,8 @@ class TestModelPlant(TestCase):
             'name': '상추',
         }
         response = client.post(
-            # reverse('plant_api_post'),
-            self.base_url,
+            reverse('ezp10:api_plant_list'),
+            # self.base_url,
             data=json.dumps(self.valid_payload),
             content_type='application/json'
         )
@@ -149,8 +158,8 @@ class TestModelPlant(TestCase):
             'name': '',
         }
         response = client.post(
-            # reverse('plant_api_post'),
-            self.base_url,
+            reverse('ezp10:api_plant_list'),
+            # self.base_url,
             data=json.dumps(self.invalid_payload),
             content_type='application/json'
         )

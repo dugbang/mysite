@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_swagger',
 
-    'rest_app',
     'bbs',
 
     # 'debug_toolbar',
@@ -124,7 +123,7 @@ DATABASES = {
         # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'mysite_db',
+        'NAME': 'mysite2_db',
         'USER': 'mysite_us',
         'PASSWORD': 'mysite_pw',
         'HOST': 'localhost',

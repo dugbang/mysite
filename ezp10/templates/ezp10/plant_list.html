@@ -10,7 +10,8 @@
 
     <ul>
         {% for plant in object_list %}
-            <li>{{ plant }}</li>
+            <li>{{ plant.name }}</li>
+            <li>{{ plant.create_at }}</li>
         {% endfor %}
     </ul>
 </div>

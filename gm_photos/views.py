@@ -2,8 +2,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 
 # Create your views here.
 from django.http import HttpResponse
+
+from gm_photos.forms import PhotoForm
 from .models import Photo
-from .forms import PhotoForm
 
 
 def hello(request):
