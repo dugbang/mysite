@@ -1,4 +1,7 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView, CreateView
 
 # Create your views here.
 from django.http import HttpResponse
@@ -38,4 +41,17 @@ def create(request):
     }
 
     return render(request, 'gm_photos/edit.html', ctx)
+
+
+class PhotoCreateView(LoginRequiredMixin, CreateView):
+    model = Photo
+    fields = ('image', 'content')
+    success_url = reverse_lazy('gm_photos:create')
+
+    template_name = 'gm_photos/edit.html'
+
+    # @csrf_exempt
+    def form_valid(self, form):
+        # form.instance.owner = self.request.user
+        return super(PhotoCreateView, self).form_valid(form)
 

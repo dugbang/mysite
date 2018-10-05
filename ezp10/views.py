@@ -34,14 +34,18 @@ class CaptureDV(DetailView):
     # template_name = 'ezp10/capture_detail.html'
 
 
-class CaptureCreateView(LoginRequiredMixin, CreateView):
+class CaptureCreateView(CreateView):
+    """
+    class CaptureCreateView(LoginRequiredMixin, CreateView):
+    LoginRequiredMixin >> login check...
+    """
     model = Capture
-    fields = ('plant', 'name', 'image', 'create_date')
+    fields = ('plant', 'controller', 'image', 'create_at')
     success_url = reverse_lazy('ezp10:capture_upload')
 
     # template_name = 'ezp10/capture_form.html'
 
-    @csrf_exempt
+    # @csrf_exempt
     def form_valid(self, form):
         # form.instance.owner = self.request.user
         return super(CaptureCreateView, self).form_valid(form)

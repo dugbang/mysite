@@ -76,7 +76,7 @@ class ControllerSerializer(serializers.ModelSerializer):
     # TODO; 정보 일치시키기.
     class Meta:
         model = Controller
-        fields = ('serial', 'is_action', 'plant',
+        fields = ('serial', 'is_active', 'plant',
                   'minute_of_action_cycle', 'minute_of_upload_cycle',
                   'iis_tank_capacity', 'iis_temperature', 'iis_ph', 'iis_mc',
                   'iis_temp_humidity_high', 'iis_temp_humidity_low', 'iis_luminance', 'iis_co2',

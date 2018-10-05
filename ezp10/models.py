@@ -25,10 +25,14 @@ class Plant(models.Model):
 
 
 def _get_upload_path_actuator(instance, filename):
+    et = datetime.now()
+    year = et.strftime('%Y')
+    month = et.strftime('%m')
     # str_time = '{}'.format(datetime.now())[:19]
     # filename; 상추_20180712.cvs
-    return os.path.join('actuator', '{}'.format(instance.serial),
-                        '{}'.format(datetime.now())[:10], filename)
+    # TODO; #583 참조
+    # 파일정보를 로그로 출력하여 보기.
+    return os.path.join('actuator', '{}'.format(instance.serial), year, month, filename)
 
 
 class Controller(models.Model):
@@ -39,7 +43,7 @@ class Controller(models.Model):
     # serial = models.CharField('serial', max_length=16, unique=True)
     serial = models.CharField(max_length=16, primary_key=True)
 
-    is_action = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=False)
 
     # TODO; 다른 모델과 같이 추가되어야 함.
     # owner = models.ForeignKey(User, on_delete=models.DO_NOTHING)
@@ -73,7 +77,7 @@ class Controller(models.Model):
     stable_time_of_camera = models.IntegerField(default=5)
 
     class Meta:
-        ordering = ('serial', 'is_action', 'plant')
+        ordering = ('serial', 'is_active', 'plant')
 
     def __str__(self):
         return self.serial
@@ -114,7 +118,7 @@ class Capture(models.Model):
     create_at = models.DateTimeField(null=True)
 
     class Meta:
-        ordering = ('plant', 'create_at', )
+        ordering = ('plant', 'controller', 'create_at', )
 
     def __str__(self):
         return self.image.name

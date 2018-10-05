@@ -9,7 +9,7 @@ class PlantAdmin(admin.ModelAdmin):
 
 
 class ControllerAdmin(admin.ModelAdmin):
-    list_display = ('serial', 'is_action', 'plant',
+    list_display = ('serial', 'is_active', 'plant',
                     'minute_of_action_cycle', 'minute_of_upload_cycle',
                     'iis_tank_capacity', 'iis_temperature', 'iis_ph', 'iis_mc',
                     'iis_temp_humidity_high', 'iis_temp_humidity_low', 'iis_luminance', 'iis_co2',
@@ -23,7 +23,7 @@ class ControllerAdmin(admin.ModelAdmin):
 
 
 class CaptureAdmin(admin.ModelAdmin):
-    list_display = ('plant', 'controller', 'image')
+    list_display = ('plant', 'controller', 'image', 'create_at')
 
 
 class ReportAdmin(admin.ModelAdmin):
